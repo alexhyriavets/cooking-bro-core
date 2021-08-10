@@ -1,9 +1,9 @@
-import { DishEntity } from "../entites/DishEntity";
-import { Cart } from "../entites/Cart";
+import { CartEntity } from "../entites/CartEntity";
 import { CountableIngridientEntity } from "../entites/CountableIngridientEntity";
+import { DishEntity } from "../entites/DishEntity";
 
-export class CartService {
-  public createCart(dishes: DishEntity[]): Cart {
+export class CreateCartUseCase {
+  execute(dishes: DishEntity[]): CartEntity {
     const ingridients = dishes.flatMap((dish) => dish.ingridients);
 
     const mergedIngridients = ingridients.reduce(
@@ -13,7 +13,10 @@ export class CartService {
         );
         const ingridientInCart = ingridientsInCart[ingridientInCartIndex];
 
-        if (ingridientInCart.canMerge(countableIngradient)) {
+        if (
+          ingridientInCart &&
+          ingridientInCart.canMerge(countableIngradient)
+        ) {
           ingridientsInCart[ingridientInCartIndex] =
             ingridientInCart.merge(countableIngradient);
 
@@ -27,6 +30,6 @@ export class CartService {
       [] as CountableIngridientEntity[]
     );
 
-    return new Cart(Math.random() * 1000, new Date(), mergedIngridients);
+    return new CartEntity(Math.random() * 1000, new Date(), mergedIngridients);
   }
 }
