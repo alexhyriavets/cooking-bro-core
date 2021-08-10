@@ -1,9 +1,1 @@
-type Test = {
-  one: number;
-};
-
-const test: Test = {
-  one: 1,
-};
-
-console.log(test);
+console.log("Main file");
