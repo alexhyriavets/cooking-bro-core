@@ -12,7 +12,7 @@ export class CountableIngridientEntity {
     return this.ingridient.id === entity.ingridient.id;
   }
 
-  private canMerge(entity: CountableIngridientEntity): boolean {
+  public canMerge(entity: CountableIngridientEntity): boolean {
     return this.equals(entity) && this.unit === entity.unit;
   }
 

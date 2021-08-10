@@ -13,12 +13,9 @@ export class CartService {
         );
         const ingridientInCart = ingridientsInCart[ingridientInCartIndex];
 
-        if (
-          Boolean(ingridientInCart) &&
-          ingridientInCart.unit === countableIngradient.unit
-        ) {
+        if (ingridientInCart.canMerge(countableIngradient)) {
           ingridientsInCart[ingridientInCartIndex] =
-            ingridientsInCart[ingridientInCartIndex].merge(countableIngradient);
+            ingridientInCart.merge(countableIngradient);
 
           return ingridientsInCart;
         }
