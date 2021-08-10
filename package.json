@@ -1,0 +1,15 @@
+{
+  "name": "cooking-bro",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "Oleksandr Hyriavets",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.3.5"
+  }
+}
