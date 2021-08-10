@@ -1,14 +1,14 @@
 import { Identifiable } from "../interfaces/Identifiable";
 import { CountableIngridientEntity } from "./CountableIngridientEntity";
 
-export class DishEntity implements Identifiable<DishEntity> {
+export class Cart implements Identifiable<Cart> {
   constructor(
     public id: number,
-    public name: string,
-    public ingridients: CountableIngridientEntity[]
+    public createdAt: Date,
+    public items: CountableIngridientEntity[]
   ) {}
 
-  equals(entity: DishEntity): boolean {
+  equals(entity: Cart): boolean {
     return entity.id === this.id;
   }
 }

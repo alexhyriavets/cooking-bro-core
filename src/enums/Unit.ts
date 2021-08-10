@@ -1,5 +1,5 @@
 export enum Unit {
-  Kilogram,
-  Liter,
-  Unit,
+  Kilogram = "Kilogram",
+  Liter = "Liter",
+  Unit = "Unit",
 }
