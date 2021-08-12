@@ -41,12 +41,14 @@ const dish1 = new DishEntity(getId(), "Borshch", [potato3, tomato1]);
 const dish2 = new DishEntity(getId(), "Sup", [potato2, tomato2, orange5]);
 
 const createCart = new CreateCartUseCase().execute;
-const newCart = createCart([dish1, dish2]);
 
 const cartRepository = getCartRepository();
 
 (async () => {
-  const savedCard = await cartRepository.getOne((await newCart).id);
+  await createCart([dish1, dish2]);
+  await createCart([dish1]);
+
+  const savedCard = await cartRepository.getAll();
 
   console.log("saved", savedCard);
 })();
