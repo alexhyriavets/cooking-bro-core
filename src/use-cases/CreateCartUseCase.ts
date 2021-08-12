@@ -30,15 +30,6 @@ export class CreateCartUseCase {
       [] as CountableIngridientEntity[]
     );
 
-    const cartRepository = new CartRepository();
-
-    const newCart = new CartEntity(
-      Math.random() * 1000,
-      new Date(),
-      mergedIngridients
-    );
-    await cartRepository.saveOne(newCart);
-
     return new CartEntity(Math.random() * 1000, new Date(), mergedIngridients);
   }
 }
