@@ -2,8 +2,18 @@ import { CartEntity } from "../entites/CartEntity";
 import { CartRepository } from "../repositories/CartRepository";
 import { InMemoryStorage } from "../services/InMemoryStorage";
 
-export function createCartRepository(): CartRepository {
+let instance: CartRepository | null = null;
+
+export function getCartRepository(): CartRepository {
+  if (instance) {
+    return instance;
+  }
+
   const cartInMemoryStorage = new InMemoryStorage<CartEntity>();
 
-  return new CartRepository(cartInMemoryStorage);
+  const newIstance = new CartRepository(cartInMemoryStorage);
+
+  instance = newIstance;
+
+  return instance;
 }

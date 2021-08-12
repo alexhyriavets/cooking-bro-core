@@ -7,11 +7,13 @@ export class InMemoryStorage<T extends Identifiable<T>>
   // @ts-ignore
   private state: Record<T["id"], T> = {};
 
-  async saveOne(entity: T): Promise<void> {
+  async saveOne(entity: T): Promise<T> {
     this.state = {
       ...this.state,
       [entity.id]: entity,
     };
+
+    return entity;
   }
 
   async delete(id: T["id"]): Promise<void> {

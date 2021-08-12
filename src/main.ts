@@ -2,6 +2,7 @@ import { CountableIngridientEntity } from "./entites/CountableIngridientEntity";
 import { DishEntity } from "./entites/DishEntity";
 import { IngridientEntity } from "./entites/IngridientEntity";
 import { Unit } from "./enums/Unit";
+import { getCartRepository } from "./factories/cartRepositoryFactory";
 import { CreateCartUseCase } from "./use-cases/CreateCartUseCase";
 
 const getId = () => Math.round(Math.random() * 100000000);
@@ -39,6 +40,13 @@ const orange5: CountableIngridientEntity = new CountableIngridientEntity(
 const dish1 = new DishEntity(getId(), "Borshch", [potato3, tomato1]);
 const dish2 = new DishEntity(getId(), "Sup", [potato2, tomato2, orange5]);
 
-const result = new CreateCartUseCase().execute([dish1, dish2]);
+const createCart = new CreateCartUseCase().execute;
+const newCart = createCart([dish1, dish2]);
 
-console.log(result);
+const cartRepository = getCartRepository();
+
+(async () => {
+  const savedCard = await cartRepository.getOne((await newCart).id);
+
+  console.log("saved", savedCard);
+})();

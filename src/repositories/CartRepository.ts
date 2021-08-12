@@ -5,7 +5,7 @@ import { StorageService } from "../interfaces/StorageService";
 export class CartRepository implements Repository<CartEntity> {
   constructor(private storage: StorageService<CartEntity>) {}
 
-  saveOne(entity: CartEntity): Promise<void> {
+  saveOne(entity: CartEntity): Promise<CartEntity> {
     return this.storage.saveOne(entity);
   }
 

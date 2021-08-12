@@ -1,9 +1,10 @@
 import { CartEntity } from "../entites/CartEntity";
 import { CountableIngridientEntity } from "../entites/CountableIngridientEntity";
 import { DishEntity } from "../entites/DishEntity";
+import { getCartRepository } from "../factories/cartRepositoryFactory";
 
 export class CreateCartUseCase {
-  execute(dishes: DishEntity[]): CartEntity {
+  execute(dishes: DishEntity[]): Promise<CartEntity> {
     const ingridients = dishes.flatMap((dish) => dish.ingridients);
 
     const mergedIngridients = ingridients.reduce(
@@ -30,6 +31,14 @@ export class CreateCartUseCase {
       [] as CountableIngridientEntity[]
     );
 
-    return new CartEntity(Math.random() * 1000, new Date(), mergedIngridients);
+    const cartRepository = getCartRepository();
+
+    const newCart = new CartEntity(
+      Math.round(Math.random() * 1000),
+      new Date(),
+      mergedIngridients
+    );
+
+    return cartRepository.saveOne(newCart);
   }
 }
